@@ -35,6 +35,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- lecture ponctuelle du panier au montage, nécessaire pour éviter un mismatch d'hydratation (localStorage indisponible côté serveur).
       if (raw) setItems(JSON.parse(raw));
     } catch {
       // localStorage indisponible ou contenu corrompu : on repart d'un panier vide.
