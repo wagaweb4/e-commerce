@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import ProductGallery from "@/components/site/ProductGallery";
-import ProductOptions from "@/components/site/ProductOptions";
+import AddToCartForm from "@/components/site/AddToCartForm";
 
 export const dynamic = "force-dynamic";
 
@@ -45,19 +45,18 @@ export default async function ProduitPage({
             </p>
           )}
 
-          <ProductOptions tailles={produit.tailles} couleurs={produit.couleurs} />
-
-          <p className="mt-8 text-xs font-light uppercase tracking-wide text-muted">
-            {produit.stock > 0 ? "En stock" : "Rupture de stock"}
-          </p>
-
-          <button
-            type="button"
-            disabled={produit.stock === 0}
-            className="mt-4 w-full border border-forest bg-forest px-8 py-3.5 text-sm font-light tracking-wide text-cream transition-colors duration-300 hover:bg-accent hover:border-accent disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
-          >
-            Ajouter au panier
-          </button>
+          <div className="mt-8">
+            <AddToCartForm
+              produitId={produit.id}
+              slug={produit.slug}
+              nom={produit.nom}
+              prix={Number(produit.prix)}
+              image={produit.images?.[0] ?? null}
+              tailles={produit.tailles}
+              couleurs={produit.couleurs}
+              stock={produit.stock}
+            />
+          </div>
         </div>
       </div>
     </div>
