@@ -20,7 +20,7 @@ export default async function CategoriePage({
 
   return (
     <div>
-      <div className="relative flex h-[45vh] min-h-80 items-end overflow-hidden border-b border-border">
+      <div className="relative flex h-[32vh] min-h-64 items-end overflow-hidden border-b border-border sm:h-[40vh] lg:h-[45vh] lg:min-h-80">
         {image ? (
           <Image
             src={image}

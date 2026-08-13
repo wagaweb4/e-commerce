@@ -38,8 +38,8 @@ export default async function AdminProduitsPage() {
       )}
 
       {!error && produits && produits.length > 0 && (
-        <div className="mt-8 overflow-hidden border border-border bg-surface">
-          <table className="w-full text-left text-sm">
+        <div className="mt-8 overflow-x-auto border border-border bg-surface">
+          <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
               <tr className="border-b border-border text-xs font-light uppercase tracking-wide text-muted">
                 <th className="px-5 py-3">Produit</th>

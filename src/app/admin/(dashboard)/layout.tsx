@@ -9,15 +9,15 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen bg-cream">
       <header className="border-b border-border bg-surface">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-10">
-          <div className="flex items-center gap-10">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5 lg:px-10">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-10">
             <Link
               href="/admin/produits"
               className="font-display text-xl tracking-[0.2em] text-forest"
             >
               LAVIBEL
             </Link>
-            <nav className="flex items-center gap-6 text-sm font-light tracking-wide">
+            <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-light tracking-wide">
               <Link
                 href="/admin/produits"
                 className="text-forest transition-colors duration-300 hover:text-accent"
