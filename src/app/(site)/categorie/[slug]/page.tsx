@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getProductsByCategorySlug } from "@/lib/products";
 import ProductCard from "@/components/site/ProductCard";
+import FadeIn from "@/components/site/FadeIn";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,7 @@ export default async function CategoriePage({
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
-      <div className="border-b border-border pb-8">
+      <div className="animate-fade-in-up border-b border-border pb-8">
         <p className="text-xs font-light uppercase tracking-[0.35em] text-accent">
           Collection
         </p>
@@ -31,8 +32,10 @@ export default async function CategoriePage({
         </p>
       ) : (
         <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
-          {produits.map((produit) => (
-            <ProductCard key={produit.id} produit={produit} />
+          {produits.map((produit, index) => (
+            <FadeIn key={produit.id} delay={(index % 4) * 90}>
+              <ProductCard produit={produit} />
+            </FadeIn>
           ))}
         </div>
       )}

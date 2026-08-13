@@ -28,7 +28,7 @@ export default async function ProduitPage({
         </Link>
       )}
 
-      <div className="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="mt-6 grid animate-fade-in-up gap-12 lg:grid-cols-2 lg:gap-16">
         <ProductGallery images={produit.images} nom={produit.nom} />
 
         <div className="lg:pt-2">

@@ -1,12 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import type { ProductWithCategory } from "@/types/database";
+import { NAV_CATEGORIES } from "@/lib/navCategories";
 
-export const NAV_CATEGORIES = [
-  { slug: "femme", label: "Femme" },
-  { slug: "homme", label: "Homme" },
-  { slug: "chaussures", label: "Chaussures" },
-  { slug: "accessoires", label: "Accessoires" },
-] as const;
+export { NAV_CATEGORIES };
 
 export async function getCategories() {
   const supabase = await createClient();

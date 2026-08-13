@@ -10,7 +10,7 @@ export default function PanierPage() {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-24 text-center lg:px-10">
+      <div className="mx-auto max-w-3xl animate-fade-in-up px-6 py-24 text-center lg:px-10">
         <h1 className="font-display text-3xl font-light text-forest">
           Votre panier est vide
         </h1>
@@ -28,7 +28,7 @@ export default function PanierPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16 lg:px-10">
+    <div className="mx-auto max-w-5xl animate-fade-in-up px-6 py-16 lg:px-10">
       <h1 className="font-display text-3xl font-light text-forest lg:text-4xl">
         Votre panier
       </h1>
@@ -40,10 +40,15 @@ export default function PanierPage() {
             <div key={key} className="flex gap-5 py-6">
               <Link
                 href={`/produits/${item.slug}`}
-                className="relative h-28 w-24 shrink-0 overflow-hidden border border-border bg-surface"
+                className="group relative h-28 w-24 shrink-0 overflow-hidden border border-border bg-surface"
               >
                 {item.image && (
-                  <Image src={item.image} alt={item.nom} fill className="object-cover" />
+                  <Image
+                    src={item.image}
+                    alt={item.nom}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-premium group-hover:scale-110"
+                  />
                 )}
               </Link>
 
@@ -68,16 +73,18 @@ export default function PanierPage() {
                     <button
                       type="button"
                       onClick={() => updateQuantity(key, item.quantite - 1)}
-                      className="px-3 py-1 text-forest transition-colors duration-300 hover:text-accent"
+                      className="px-3 py-1 text-forest transition-colors duration-300 hover:bg-cream hover:text-accent active:scale-90"
                       aria-label="Diminuer la quantité"
                     >
                       −
                     </button>
-                    <span className="w-8 text-center text-sm text-forest">{item.quantite}</span>
+                    <span key={item.quantite} className="w-8 animate-pop text-center text-sm text-forest">
+                      {item.quantite}
+                    </span>
                     <button
                       type="button"
                       onClick={() => updateQuantity(key, item.quantite + 1)}
-                      className="px-3 py-1 text-forest transition-colors duration-300 hover:text-accent"
+                      className="px-3 py-1 text-forest transition-colors duration-300 hover:bg-cream hover:text-accent active:scale-90"
                       aria-label="Augmenter la quantité"
                     >
                       +
@@ -104,9 +111,12 @@ export default function PanierPage() {
         </div>
         <Link
           href="/commande"
-          className="w-full max-w-xs border border-forest bg-forest px-8 py-3.5 text-center text-sm font-light tracking-wide text-cream transition-colors duration-300 hover:bg-accent hover:border-accent"
+          className="group flex w-full max-w-xs items-center justify-center gap-3 border border-forest bg-forest px-8 py-3.5 text-center text-sm font-light tracking-wide text-cream transition-all duration-300 ease-premium hover:bg-accent hover:border-accent"
         >
           Passer la commande
+          <span className="transition-transform duration-300 ease-premium group-hover:translate-x-1">
+            →
+          </span>
         </Link>
       </div>
     </div>
