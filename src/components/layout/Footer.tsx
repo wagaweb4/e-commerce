@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NAV_CATEGORIES } from "@/lib/navCategories";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -22,21 +23,16 @@ export default function Footer() {
               Navigation
             </p>
             <ul className="mt-3 space-y-2 text-sm font-light text-muted">
-              <li>
-                <Link href="/femme" className="transition-colors duration-300 hover:text-accent">
-                  Femme
-                </Link>
-              </li>
-              <li>
-                <Link href="/homme" className="transition-colors duration-300 hover:text-accent">
-                  Homme
-                </Link>
-              </li>
-              <li>
-                <Link href="/accessoires" className="transition-colors duration-300 hover:text-accent">
-                  Accessoires
-                </Link>
-              </li>
+              {NAV_CATEGORIES.map((cat) => (
+                <li key={cat.slug}>
+                  <Link
+                    href={`/categorie/${cat.slug}`}
+                    className="transition-colors duration-300 hover:text-accent"
+                  >
+                    {cat.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
