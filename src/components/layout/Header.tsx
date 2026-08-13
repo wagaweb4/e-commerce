@@ -2,6 +2,14 @@ import Link from "next/link";
 import { NAV_CATEGORIES } from "@/lib/products";
 import CartButton from "@/components/site/CartButton";
 
+const NAV_LINKS = [
+  { href: "/", label: "Accueil" },
+  ...NAV_CATEGORIES.map((cat) => ({
+    href: `/categorie/${cat.slug}`,
+    label: cat.label,
+  })),
+];
+
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-cream/90 backdrop-blur">
@@ -13,14 +21,14 @@ export default function Header() {
           LAVIBEL
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
-          {NAV_CATEGORIES.map((cat) => (
+        <nav className="hidden items-center gap-3 md:flex">
+          {NAV_LINKS.map((link) => (
             <Link
-              key={cat.slug}
-              href={`/categorie/${cat.slug}`}
-              className="text-sm font-light tracking-wide text-forest transition-colors duration-300 hover:text-accent"
+              key={link.href}
+              href={link.href}
+              className="border border-border px-4 py-2 text-sm font-light tracking-wide text-forest transition-colors duration-300 hover:border-accent hover:text-accent"
             >
-              {cat.label}
+              {link.label}
             </Link>
           ))}
         </nav>
