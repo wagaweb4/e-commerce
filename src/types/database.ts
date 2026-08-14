@@ -24,6 +24,36 @@ export type ProductWithCategory = Product & {
   categories: Category | null;
 };
 
+export type CommandeArticle = {
+  produit_id: string;
+  nom: string;
+  prix: number;
+  taille: string | null;
+  couleur: string | null;
+  quantite: number;
+};
+
+export type CommandeStatut =
+  | "en_attente"
+  | "confirmee"
+  | "expediee"
+  | "livree"
+  | "annulee";
+
+export type Commande = {
+  id: string;
+  nom_client: string;
+  telephone: string;
+  email: string | null;
+  adresse: string;
+  ville: string;
+  notes: string | null;
+  articles: CommandeArticle[];
+  total: number;
+  statut: CommandeStatut;
+  created_at: string;
+};
+
 export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "13.0.5";
@@ -51,6 +81,15 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      commandes: {
+        Row: Commande;
+        Insert: Omit<Commande, "id" | "created_at" | "statut"> & {
+          id?: string;
+          statut?: CommandeStatut;
+        };
+        Update: Partial<Omit<Commande, "id" | "created_at">>;
+        Relationships: [];
       };
     };
     Views: Record<string, never>;

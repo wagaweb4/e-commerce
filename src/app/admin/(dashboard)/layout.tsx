@@ -30,6 +30,12 @@ export default function DashboardLayout({
               >
                 Catégories
               </Link>
+              <Link
+                href="/admin/commandes"
+                className="text-forest transition-colors duration-300 hover:text-accent"
+              >
+                Commandes
+              </Link>
             </nav>
           </div>
           <form action={logout}>
