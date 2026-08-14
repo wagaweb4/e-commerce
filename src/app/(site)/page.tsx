@@ -1,24 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
+import { getCategoryHighlights, getFeaturedProducts } from "@/lib/products";
+import ProductCard from "@/components/site/ProductCard";
 
-const UNIVERS = [
-  {
-    label: "Femme",
-    href: "/femme",
-    description: "Silhouettes fluides, matières nobles.",
-  },
-  {
-    label: "Homme",
-    href: "/homme",
-    description: "Coupes épurées, savoir-faire précis.",
-  },
-  {
-    label: "Accessoires",
-    href: "/accessoires",
-    description: "Les détails qui font la différence.",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [produitsPhares, univers] = await Promise.all([
+    getFeaturedProducts(8),
+    getCategoryHighlights(),
+  ]);
+
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border">
@@ -36,7 +28,7 @@ export default function HomePage() {
             pour durer — une garde-robe minimaliste, aux finitions justes.
           </p>
           <Link
-            href="/nouveautes"
+            href="#produits-phares"
             className="mt-10 inline-flex items-center gap-3 border border-forest px-8 py-3.5 text-sm font-light tracking-wide text-forest transition-colors duration-300 hover:bg-forest hover:text-cream"
           >
             Découvrir la collection
@@ -44,30 +36,52 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <h2 className="font-display text-3xl font-light text-forest">
-          Nos univers
-        </h2>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {UNIVERS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group block border border-border bg-surface p-8 transition-colors duration-300 hover:border-accent"
-            >
-              <div className="aspect-[4/5] w-full border border-border bg-cream transition-colors duration-300 group-hover:border-accent" />
-              <p className="mt-6 font-display text-2xl font-light text-forest">
-                {item.label}
-              </p>
-              <p className="mt-2 text-sm font-light text-muted">
-                {item.description}
-              </p>
-            </Link>
-          ))}
+      {produitsPhares.length > 0 && (
+        <section id="produits-phares" className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+          <h2 className="font-display text-3xl font-light text-forest">
+            Produits phares
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
+            {produitsPhares.map((produit) => (
+              <ProductCard key={produit.id} produit={produit} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="border-t border-border bg-surface">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+          <h2 className="font-display text-3xl font-light text-forest">
+            Nos univers
+          </h2>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {univers.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/categorie/${item.slug}`}
+                className="group block"
+              >
+                <div className="relative aspect-[4/5] w-full overflow-hidden border border-border bg-cream transition-colors duration-300 group-hover:border-accent">
+                  {item.image && (
+                    <Image
+                      src={item.image}
+                      alt={item.label}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                </div>
+                <p className="mt-6 font-display text-2xl font-light text-forest">
+                  {item.label}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="border-t border-border bg-surface">
+      <section>
         <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-10">
           <h2 className="font-display text-3xl font-light text-forest">
             Une maison, une exigence

@@ -1,11 +1,5 @@
 import Link from "next/link";
-
-const NAV_LINKS = [
-  { href: "/nouveautes", label: "Nouveautés" },
-  { href: "/femme", label: "Femme" },
-  { href: "/homme", label: "Homme" },
-  { href: "/accessoires", label: "Accessoires" },
-];
+import { NAV_CATEGORIES } from "@/lib/products";
 
 export default function Header() {
   return (
@@ -19,13 +13,13 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-10 md:flex">
-          {NAV_LINKS.map((link) => (
+          {NAV_CATEGORIES.map((cat) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={cat.slug}
+              href={`/categorie/${cat.slug}`}
               className="text-sm font-light tracking-wide text-forest transition-colors duration-300 hover:text-accent"
             >
-              {link.label}
+              {cat.label}
             </Link>
           ))}
         </nav>
