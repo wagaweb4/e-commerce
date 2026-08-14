@@ -34,7 +34,7 @@ export default function ProductGallery({
       </div>
 
       {displayImages.length > 1 && (
-        <div className="mt-4 grid grid-cols-5 gap-3">
+        <div className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-5 sm:gap-3">
           {displayImages.map((src, index) => (
             <button
               key={src ?? index}

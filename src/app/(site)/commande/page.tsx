@@ -50,7 +50,7 @@ export default function CommandePage() {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="text-xs font-light uppercase tracking-wide text-muted">
                 Téléphone
