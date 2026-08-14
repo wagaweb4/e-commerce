@@ -15,15 +15,16 @@ export default function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-[3/4] w-full overflow-hidden border border-border bg-surface">
+      <div className="relative aspect-3/4 w-full overflow-hidden border border-border bg-surface">
         {displayImages[active] ? (
           <Image
+            key={active}
             src={displayImages[active] as string}
             alt={nom}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             priority
-            className="object-cover"
+            className="animate-fade-in object-cover"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-sm font-light uppercase tracking-wide text-muted">
@@ -39,8 +40,10 @@ export default function ProductGallery({
               key={src ?? index}
               type="button"
               onClick={() => setActive(index)}
-              className={`relative aspect-[3/4] overflow-hidden border transition-colors duration-300 ${
-                index === active ? "border-accent" : "border-border hover:border-accent"
+              className={`relative aspect-3/4 overflow-hidden border transition-all duration-300 ease-premium ${
+                index === active
+                  ? "border-forest opacity-100"
+                  : "border-border opacity-70 hover:border-accent hover:opacity-100"
               }`}
             >
               {src && (

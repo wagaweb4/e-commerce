@@ -24,10 +24,10 @@ function OptionGroup({
             type="button"
             onClick={() => onSelect(option)}
             aria-pressed={selected === option}
-            className={`border px-4 py-2 text-sm font-light tracking-wide transition-colors duration-300 ${
+            className={`border px-4 py-2 text-sm font-light tracking-wide transition-all duration-300 ease-premium active:scale-95 ${
               selected === option
                 ? "border-forest bg-forest text-cream"
-                : "border-border text-forest hover:border-accent"
+                : "border-border text-forest hover:border-accent hover:text-accent"
             }`}
           >
             {option}
@@ -109,16 +109,18 @@ export default function AddToCartForm({
           <button
             type="button"
             onClick={() => setQuantite((q) => Math.max(1, q - 1))}
-            className="px-3 py-1.5 text-forest transition-colors duration-300 hover:text-accent"
+            className="px-3 py-1.5 text-forest transition-colors duration-300 hover:bg-cream hover:text-accent active:scale-90"
             aria-label="Diminuer la quantité"
           >
             −
           </button>
-          <span className="w-8 text-center text-sm text-forest">{quantite}</span>
+          <span key={quantite} className="w-8 animate-pop text-center text-sm text-forest">
+            {quantite}
+          </span>
           <button
             type="button"
             onClick={() => setQuantite((q) => q + 1)}
-            className="px-3 py-1.5 text-forest transition-colors duration-300 hover:text-accent"
+            className="px-3 py-1.5 text-forest transition-colors duration-300 hover:bg-cream hover:text-accent active:scale-90"
             aria-label="Augmenter la quantité"
           >
             +
@@ -134,9 +136,16 @@ export default function AddToCartForm({
         type="button"
         onClick={handleAdd}
         disabled={enRupture}
-        className="mt-4 w-full border border-forest bg-forest px-8 py-3.5 text-sm font-light tracking-wide text-cream transition-colors duration-300 hover:bg-accent hover:border-accent disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+        className={`mt-4 w-full border px-8 py-3.5 text-sm font-light tracking-wide transition-all duration-300 ease-premium active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto ${
+          confirme
+            ? "border-forest bg-forest/90 text-cream"
+            : "border-forest bg-forest text-cream hover:bg-accent hover:border-accent"
+        }`}
       >
-        {confirme ? "Ajouté au panier ✓" : "Ajouter au panier"}
+        <span className="inline-flex items-center gap-2">
+          {confirme && <span className="animate-pop">✓</span>}
+          {confirme ? "Ajouté au panier" : "Ajouter au panier"}
+        </span>
       </button>
     </div>
   );

@@ -30,7 +30,7 @@ export default function CommandePage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16 lg:px-10">
+    <div className="mx-auto max-w-5xl animate-fade-in-up px-6 py-16 lg:px-10">
       <h1 className="font-display text-3xl font-light text-forest lg:text-4xl">
         Finaliser la commande
       </h1>

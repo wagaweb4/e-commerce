@@ -32,7 +32,7 @@ export default async function ConfirmationCommandePage({
   const articles = commande.articles as unknown as CommandeArticle[];
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-24 lg:px-10">
+    <div className="mx-auto max-w-2xl animate-fade-in-up px-6 py-24 lg:px-10">
       <ClearCartOnMount />
 
       <p className="text-xs font-light uppercase tracking-[0.35em] text-accent">
